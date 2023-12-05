@@ -17,7 +17,6 @@ function game(startGame){
             let points = choicesComparison(userInput,computerChoice, userPoints, ComputerPoints);
             userPoints = points[0];
             ComputerPoints = points[1];
-            console.log (userPoints);
         }
 
         if (userPoints == 5){
