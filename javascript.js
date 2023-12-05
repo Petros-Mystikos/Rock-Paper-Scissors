@@ -1,18 +1,57 @@
 let computerChoices = ['rock', 'paper', 'scissors'];
+let userPoints = 0;
+let ComputerPoints = 0;
+let start = true;
 
-let userCounter = 0;
-let ComputerCounter = 0;
+game(start)
 
-while( userCounter != 5 && ComputerCounter != 5){
-    let randomNumber = Math.floor(Math.random() * 3);
-    let computerChoice = computerChoices[randomNumber];
-    console.log(computerChoice);
-    let userChoice = prompt('Choose your weapon against your opponent (rock, paper, scissors)');
-    
-    while( userChoice != 'rock' && userChoice != 'paper' && userChoice != 'scissors'){
-    userChoice = prompt('Choose again, write the whole word  (rock, paper, scissors)');
-    userChoice = userChoice.toLowerCase();
+
+// below this line are the functions that we use //
+
+function game(startGame){
+    while (startGame){
+        while (userPoints != 5 && ComputerPoints != 5) {
+            let createBothChoices = choices();
+            let computerChoice = createBothChoices[0]
+            let userInput = createBothChoices[1]
+            let points = choicesComparison(userInput,computerChoice, userPoints, ComputerPoints);
+            userPoints = points[0];
+            ComputerPoints = points[1];
+            console.log (userPoints);
+        }
+
+        if (userPoints == 5){
+            console.log('Congratulations you won');
+        }
+        else {
+            
+            console.log('You lost against the computer');
+        }
+        console.log('GAME OVER')
+
+        let userDecision = prompt('type yes if you want to stop or anything to continue playing');
+        userDecision = userDecision.toLowerCase();
+        if(userDecision == 'yes'){
+            startGame = false;
+        }
+        else{
+            userPoints = 0;s
+            ComputerPoints = 0;
+        }
+    }   
+}
+
+function choices(pc, user){
+    pc = computerChoices[Math.floor(Math.random() * 3)];
+    user = prompt('Choose your weapon against your opponent (rock, paper, scissors)');
+    while( user != 'rock' && user != 'paper' && user != 'scissors'){
+    user = prompt('Choose again, write the whole word  (rock, paper, scissors)');
+    user = user.toLowerCase();
     }
+    return [pc, user];
+}
+
+function choicesComparison(userChoice, computerChoice, userCounter, ComputerCounter){
 
     if (userChoice == 'rock'){
         if (computerChoice == 'scissors'){
@@ -55,11 +94,5 @@ while( userCounter != 5 && ComputerCounter != 5){
             console.log('Your Opponent chose scissors. Its a tie, scissors vs scissors');
         }
     }
-}
-
-if (userCounter == 5){
-    console.log('Congratulations you won');
-}
-else {
-    console.log('You lost again the computer');
+    return [userCounter, ComputerCounter];
 }
