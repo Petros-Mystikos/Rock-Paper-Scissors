@@ -1,21 +1,115 @@
 // querySelector
+const welcomeName = document.querySelector('.welcome');
+const rounds = document.querySelector('.round');
+const points = document.querySelector('.points');
+const result = document.querySelector('.winOrLose');
+const userChoiceToFight = document.querySelector('.user-choice');
+const computerChoiceToFight = document.querySelector('.computer-choice');
+const reasonOfResult= document.querySelector('.reasonOfOutput');
+const userChoice= document.querySelector('.user-choices');
 
-let welcomeName = document.querySelector('.welcome');
-let rounds = document.querySelector('.round');
-let points = document.querySelector('.points');
-let result = document.querySelector('.winOrLose');
-let userChoiceToFight = document.querySelector('.user-choice');
-let computerChoiceToFight = document.querySelector('.computer-choice');
-let reasonOfResult= document.querySelector('.reasonOfOutput');
-let userChoice= document.querySelector('.user-choices');
-
-// player's name
-
-
-
-
+// variables
+let computerPoint = 0;
+let userPoint = 0;
+let roundCounter = 0; 
 
 
+// // player's name
+// let userName = prompt('Choose your arena name:');
+
+// if (userName !== null && userName !== ''){
+//     welcomeName.textContent = `Welcome ${userName}`;
+// }
+
+
+
+//user's choice
+userChoice.addEventListener('click', (e) =>{
+    let userWeapon = e.target.className; // get the class of the element
+    userMove(userWeapon);
+    let computerWeapon = computerMove();
+    let bothPoints = gameResult(userWeapon, computerWeapon, userPoint, computerPoint); // gets function's return array
+    userPoint = bothPoints[0];
+    computerPoint = bothPoints[1];
+    points.textContent = `${computerPoint} - ${userPoint}`;
+    roundCounter =+ 1;
+    rounds.textContent = `Round ${roundCounter}`;
+})
+
+// computer's choice and picture to enter the arena
+function computerMove(){
+    const optionsOfComputer = ['paper', 'rock', 'scissors'];
+    let computerChoice = optionsOfComputer[Math.floor(Math.random() * 3)];
+
+    switch (computerChoice) {
+        case 'paper':
+            computerChoiceToFight.src ="./public/1F4DC_color.png";
+            break;
+        case 'rock':
+            computerChoiceToFight.src ="./public/1FAA8_color.png";
+            break;           
+        default:
+            computerChoiceToFight.src ="./public/2702_color.png";
+            break;
+    }
+    return computerChoice;
+}
+ 
+// user's picture to enter the arena
+function userMove(weapon){
+    switch (weapon){
+        case 'user-paper':
+            userChoiceToFight.src = "./public/1F4DC_color.png";
+            break;
+        case 'user-rock':
+            userChoiceToFight.src = "./public/1FAA8_color.png";
+            break;
+        default:
+            userChoiceToFight.src ="./public/2702_color.png";
+            break;
+        
+    }
+}
+
+// comparison of the user's and computer's choice
+function gameResult(user, computer, userCounter, computerCounter){
+    if((user === 'user-paper' && computer === 'rock') || (user === 'user-rock' && computer === 'scissors') || (user === 'user-scissors' && computer === 'paper')){
+        // win
+        result.textContent = 'YOU WIN!!!';
+        userCounter += 1;
+
+        if (computer === 'rock'){
+            reasonOfResult.textContent='Paper beats rock';
+        }
+        else if(computer === 'paper'){
+            reasonOfResult.textContent='Scissors beat paper';
+        }
+        else{
+            reasonOfResult.textContent='Rock beats scissors';
+        }
+    }
+    else if((user === 'user-paper' && computer === 'scissors') || (user === 'user-rock' && computer === 'paper') || (user === 'user-scissors' && computer === 'rock')){
+        // lose
+        result.textContent = 'YOU LOSE!!!';
+        computerCounter += 1;
+
+        if (computer === 'rock'){
+            reasonOfResult.textContent='Scissors loses to rock';
+        }
+        else if(computer === 'paper'){
+            reasonOfResult.textContent='Rock loses to paper';
+        }
+        else{
+            reasonOfResult.textContent='Paper loses to scissors' ;
+        }
+    }
+    else{
+        // tie
+        result.textContent= "IT'S A TIE!!!";
+        reasonOfResult.textContent = 'Smart minds think the same ... or is this refers to stupid ones;';
+    }
+    return [userCounter,computerCounter];
+}
 
 
 
