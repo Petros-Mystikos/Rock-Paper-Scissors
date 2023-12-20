@@ -7,34 +7,43 @@ const userChoiceToFight = document.querySelector('.user-choice');
 const computerChoiceToFight = document.querySelector('.computer-choice');
 const reasonOfResult= document.querySelector('.reasonOfOutput');
 const userChoice= document.querySelector('.user-choices');
+const gamePlay = document.querySelector('.game');
+const gameRestart = document.querySelector('#game-restart');
+const restartBtn = document.querySelector('.restart')
 
 // variables
 let computerPoint = 0;
 let userPoint = 0;
-let roundCounter = 0; 
+let roundCounter = 0;
+let userDecision;
+const playAgain = document.createElement('p');
 
+//  player's name
+let userName = prompt('Choose your arena name:');
 
-// // player's name
-// let userName = prompt('Choose your arena name:');
+ if (userName !== null && userName !== ''){
+     welcomeName.textContent = `Welcome ${userName}`;
+ }
 
-// if (userName !== null && userName !== ''){
-//     welcomeName.textContent = `Welcome ${userName}`;
-// }
+//user's choice and game start
 
-
-
-//user's choice
 userChoice.addEventListener('click', (e) =>{
     let userWeapon = e.target.className; // get the class of the element
     userMove(userWeapon);
     let computerWeapon = computerMove();
-    let bothPoints = gameResult(userWeapon, computerWeapon, userPoint, computerPoint); // gets function's return array
+
+    let bothPoints = gameResult(userWeapon, computerWeapon, userPoint, computerPoint,roundCounter); // gets function's return array
     userPoint = bothPoints[0];
     computerPoint = bothPoints[1];
+    roundCounter = bothPoints[2];
     points.textContent = `${computerPoint} - ${userPoint}`;
-    roundCounter =+ 1;
     rounds.textContent = `Round ${roundCounter}`;
+
+    gameStop();
+
 })
+
+
 
 // computer's choice and picture to enter the arena
 function computerMove(){
@@ -54,7 +63,7 @@ function computerMove(){
     }
     return computerChoice;
 }
- 
+
 // user's picture to enter the arena
 function userMove(weapon){
     switch (weapon){
@@ -72,7 +81,7 @@ function userMove(weapon){
 }
 
 // comparison of the user's and computer's choice
-function gameResult(user, computer, userCounter, computerCounter){
+function gameResult(user, computer, userCounter, computerCounter, counter){
     if((user === 'user-paper' && computer === 'rock') || (user === 'user-rock' && computer === 'scissors') || (user === 'user-scissors' && computer === 'paper')){
         // win
         result.textContent = 'YOU WIN!!!';
@@ -108,110 +117,38 @@ function gameResult(user, computer, userCounter, computerCounter){
         result.textContent= "IT'S A TIE!!!";
         reasonOfResult.textContent = 'Smart minds think the same ... or is this refers to stupid ones;';
     }
-    return [userCounter,computerCounter];
+    counter += 1;
+    return [userCounter,computerCounter,counter];
 }
 
-
-
-
-
-// let computerChoices = ['rock', 'paper', 'scissors'];
-// let userPoints = 0;
-// let ComputerPoints = 0;
-// let start = true;
-
-// game(start)
-
-
-// // below this line are the functions that we use //
-
-// // this function starts the game, plays along and at the end gives the player the option to stop playing
-// function game(startGame){
-//     while (startGame){
-//         while (userPoints != 5 && ComputerPoints != 5) {
-//             let createBothChoices = choices();
-//             let computerChoice = createBothChoices[0]
-//             let userInput = createBothChoices[1]
-//             let points = choicesComparison(userInput,computerChoice, userPoints, ComputerPoints);
-//             userPoints = points[0];
-//             ComputerPoints = points[1];
-//         }
-
-//         if (userPoints == 5){
-//             console.log('Congratulations you won');
-//         }
-//         else {
+// to stop or not hte game
+function gameStop(){
+    if (userPoint >= 5 || computerPoint >= 5){
+        userDecision = prompt('Do you want to stop; (type yes to stop):');
+        userDecision = userDecision.toLowerCase();
+        if(userDecision !== 'yes'){
+            resetScores();
+        }
+        else{
+            gamePlay.classList.add('hide');
+            gameRestart.classList.remove('hide');
             
-//             console.log('You lost against the computer');
-//         }
-//         console.log('GAME OVER')
 
-//         let userDecision = prompt('type yes if you want to stop or anything to continue playing');
-//         userDecision = userDecision.toLowerCase();
-//         if(userDecision == 'yes'){
-//             startGame = false;
-//         }
-//         else{
-//             userPoints = 0;s
-//             ComputerPoints = 0;
-//         }
-//     }   
-// }
+            // restart button
+            restartBtn.addEventListener('click',() =>{
+                gamePlay.classList.remove('hide');
+                gameRestart.classList.add('hide');
+                resetScores();
+            })
+        }
+    }
+}
 
-// // this function creates a random choice for the computer and asks the user his weapon of choice
-// function choices(pc, user){
-//     pc = computerChoices[Math.floor(Math.random() * 3)];
-//     user = prompt('Choose your weapon against your opponent (rock, paper, scissors)');
-//     while( user != 'rock' && user != 'paper' && user != 'scissors'){
-//     user = prompt('Choose again, write the whole word  (rock, paper, scissors)');
-//     user = user.toLowerCase();
-//     }
-//     return [pc, user];
-// }
-
-// // this function compares the choices that the computer and user have and add a point to the winner
-// function choicesComparison(userChoice, computerChoice, userCounter, ComputerCounter){
-
-//     if (userChoice == 'rock'){
-//         if (computerChoice == 'scissors'){
-//             console.log( ' Your Opponent chose scissors. You win, rock beats scissors');
-//             userCounter++;
-//         }
-//         else if (computerChoice == 'paper'){
-//             console.log('Your Opponent chose paper. You lose, rock loses to paper');
-//             ComputerCounter++;
-//         }
-//         else{
-//             console.log('Your Opponent chose rock. Its a tie, rock vs rock');
-//         }
-//     }
-
-//     if (userChoice == 'paper'){
-//         if (computerChoice == 'rock'){
-//             console.log( ' Your Opponent chose rock. You win, paper beats rock');
-//             userCounter++;
-//         }
-//         else if (computerChoice == 'scissors'){
-//             console.log('Your Opponent chose scissors. You lose, paper loses to scissors ');
-//             ComputerCounter++;
-//         }
-//         else{
-//             console.log('Your Opponent chose paper. Its a tie, paper vs paper');
-//         }
-//     }
-
-//     if (userChoice == 'scissors'){
-//         if (computerChoice == 'paper'){
-//             console.log( ' Your Opponent chose paper. You win, scissors beats paper');
-//             userCounter++;
-//         }
-//         else if (computerChoice == 'rock'){
-//             console.log('Your Opponent chose rock. You lose, scissors loses to rock ');
-//             ComputerCounter++;
-//         }
-//         else{
-//             console.log('Your Opponent chose scissors. Its a tie, scissors vs scissors');
-//         }
-//     }
-//     return [userCounter, ComputerCounter];
-// }
+// reset scores
+function resetScores (){
+    computerPoint = 0;
+    userPoint = 0;
+    roundCounter = 0;
+    points.textContent = `${computerPoint} - ${userPoint}`;
+    rounds.textContent = `Round ${roundCounter}`;
+}
