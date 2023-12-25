@@ -10,6 +10,9 @@ img{
     width: 150px;
 }
 
+body{
+    background-color: #FFE5E5;
+}
 .game,
 .rounds-score,
 .score,
@@ -31,6 +34,7 @@ img{
 .welcome,
 .VS{
     font-size: 70px;
+    color: #756AB6;
 }
 
 
@@ -38,7 +42,12 @@ img{
     font-size: 30px;
 }
 
+.round{
+    color: #AC87C5;
+}
+
 .score{
+    color: #E0AED0;
     margin-top: 10px;
 }
 
@@ -47,6 +56,7 @@ img{
     font-size: 20px;
     border: 10px solid black;
     border-radius: 10%;
+    color: #AC87C5;
 }
 
 .winOrLose{
@@ -55,6 +65,7 @@ img{
 
 .reasonOfOutput{
     font-size: 20px;
+    color: #E0AED0;
 }
 
 .battlefield{
@@ -69,6 +80,7 @@ img{
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #AC87C5;
 }
 
 .restart{
@@ -77,6 +89,8 @@ img{
     border: 10px solid black;
     border-radius: 10%;
     font-size: 50px;
+    background-color: #E0AED0;
+    color: #756AB6;
 }
 /* this one is for js script and the restart btn */
 .hide{
