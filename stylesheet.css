@@ -92,6 +92,13 @@ body{
     background-color: #E0AED0;
     color: #756AB6;
 }
+
+/* animations */
+.player-choices > img:hover{
+    transition: 0.1s;
+    transform: scale(1.1);
+}
+
 /* this one is for js script and the restart btn */
 .hide{
     display: none;
