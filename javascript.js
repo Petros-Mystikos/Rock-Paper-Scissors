@@ -49,7 +49,7 @@ userChoice.addEventListener('click', (e) =>{
 function computerMove(){
     const optionsOfComputer = ['paper', 'rock', 'scissors'];
     let computerChoice = optionsOfComputer[Math.floor(Math.random() * 3)];
-
+    computerChoiceToFight.classList.remove('hide');
     switch (computerChoice) {
         case 'paper':
             computerChoiceToFight.src ="./public/1F4DC_color.png";
@@ -66,6 +66,7 @@ function computerMove(){
 
 // user's picture to enter the arena
 function userMove(weapon){
+    userChoiceToFight.classList.remove('hide');
     switch (weapon){
         case 'user-paper':
             userChoiceToFight.src = "./public/1F4DC_color.png";
@@ -85,6 +86,7 @@ function gameResult(user, computer, userCounter, computerCounter, counter){
     if((user === 'user-paper' && computer === 'rock') || (user === 'user-rock' && computer === 'scissors') || (user === 'user-scissors' && computer === 'paper')){
         // win
         result.textContent = 'YOU WIN!!!';
+        result.style.color ='green';
         userCounter += 1;
 
         if (computer === 'rock'){
@@ -100,6 +102,7 @@ function gameResult(user, computer, userCounter, computerCounter, counter){
     else if((user === 'user-paper' && computer === 'scissors') || (user === 'user-rock' && computer === 'paper') || (user === 'user-scissors' && computer === 'rock')){
         // lose
         result.textContent = 'YOU LOSE!!!';
+        result.style.color ='red';
         computerCounter += 1;
 
         if (computer === 'rock'){
@@ -115,6 +118,7 @@ function gameResult(user, computer, userCounter, computerCounter, counter){
     else{
         // tie
         result.textContent= "IT'S A TIE!!!";
+        result.style.color ='grey';
         reasonOfResult.textContent = 'Smart minds think the same ... or is this refers to stupid ones;';
     }
     counter += 1;
@@ -151,4 +155,10 @@ function resetScores (){
     roundCounter = 0;
     points.textContent = `${computerPoint} - ${userPoint}`;
     rounds.textContent = `Round ${roundCounter}`;
+    result.textContent ='';
+    reasonOfResult.textContent='';
+    userChoiceToFight.src ='';
+    computerChoiceToFight.src ='';
+    userChoiceToFight.classList.add('hide');
+    computerChoiceToFight.classList.add('hide');
 }
