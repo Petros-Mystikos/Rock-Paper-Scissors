@@ -1,3 +1,85 @@
+/* below this is the styling */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img{
+    height: 200px;
+    width: 150px;
+}
+
+.game,
+.rounds-score,
+.score,
+.computer-choices,
+.user-choices,
+.arena{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome,
+.rounds-score,
+.computer-choices,
+.user-choices{
+    margin: 20px;
+}
+
+.welcome,
+.VS{
+    font-size: 70px;
+}
+
+
+.rounds-score{
+    font-size: 30px;
+}
+
+.score{
+    margin-top: 10px;
+}
+
+.computer-choices,
+.user-choices{
+    font-size: 20px;
+    border: 10px solid black;
+    border-radius: 10%;
+}
+
+.winOrLose{
+    font-size: 40px;
+}
+
+.reasonOfOutput{
+    font-size: 20px;
+}
+
+.battlefield{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.restart-btn{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.restart{
+    height: 200px;
+    width: 200px;
+    border: 10px solid black;
+    border-radius: 10%;
+    font-size: 50px;
+}
+/* this one is for js script and the restart btn */
 .hide{
     display: none;
 }
+
