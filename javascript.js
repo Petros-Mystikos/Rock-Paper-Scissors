@@ -52,13 +52,13 @@ function computerMove(){
     computerChoiceToFight.classList.remove('hide');
     switch (computerChoice) {
         case 'paper':
-            computerChoiceToFight.src ="./public/1F4DC_color.png";
+            computerChoiceToFight.src ="./public/270b-1f3fb.svg";
             break;
         case 'rock':
-            computerChoiceToFight.src ="./public/1FAA8_color.png";
+            computerChoiceToFight.src ="./public/270a-1f3fb.svg";
             break;           
         default:
-            computerChoiceToFight.src ="./public/2702_color.png";
+            computerChoiceToFight.src ="./public/270c-1f3fb.svg";
             break;
     }
     return computerChoice;
@@ -69,13 +69,13 @@ function userMove(weapon){
     userChoiceToFight.classList.remove('hide');
     switch (weapon){
         case 'user-paper':
-            userChoiceToFight.src = "./public/1F4DC_color.png";
+            userChoiceToFight.src = "./public/270b-1f3fb.svg";
             break;
         case 'user-rock':
-            userChoiceToFight.src = "./public/1FAA8_color.png";
+            userChoiceToFight.src = "./public/270a-1f3fb.svg";
             break;
         default:
-            userChoiceToFight.src ="./public/2702_color.png";
+            userChoiceToFight.src ="./public/270c-1f3fb.svg";
             break;
         
     }
